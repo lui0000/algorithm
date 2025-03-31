@@ -10,6 +10,9 @@ public class RemoveNthNodeFromEndOfList {
     // далее удаляем node.next = node.next.next
     // return dummy.next
 
+    ListNode dummyNode = ListNode(0, head);
+
+
 }
 
 
