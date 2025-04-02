@@ -17,15 +17,9 @@ public class RemoveNthNodeFromEndOfList {
     // 3. удаление node с конца, просто предпоследний элемент указывает на null
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode current = head;
-        if (head.next == null) {
-            dummyNode.next = null;
-        } else if (findPrevNodeByIndex(n).next.next == null) {
-            findPrevNodeByIndex(n).next = null;
-        } else {
-            findPrevNodeByIndex(n)
-        }
-
+        ListNode prev = findPrevNodeByIndex(n);
+        prev.next = prev.next.next;
+        return
     }
 
     public void add(int val) {
@@ -52,9 +46,9 @@ public class RemoveNthNodeFromEndOfList {
     }
 
     private ListNode findPrevNodeByIndex(int n) {
-       int index = getLinkedListLenght(head) - n;
+       int index = getLinkedListLenght(dummyNode) - n;
        int i = 0;
-        ListNode current = head;
+       ListNode current = dummyNode;
        while (i != index) {
            i++;
            current = current.next;
