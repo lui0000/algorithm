@@ -1,5 +1,8 @@
 package org.example.linkedlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RemoveNthNodeFromEndOfList {
 
     // далее надо проитерироваться до len-n-1
@@ -13,28 +16,21 @@ public class RemoveNthNodeFromEndOfList {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummyNode = new ListNode(0, head);
-        ListNode prev = findPrevNodeByIndex(head, n);
-        prev.next = prev.next.next;
-        return
-    }
+        ListNode current = dummyNode;
+        int len = getLinkedListLenght(dummyNode);
 
-    public void add(int val) {
-        ListNode head = new ListNode(val, null);
-       if(head == null) {
-            head = new ListNode(val);
-        } else{
-            ListNode current = head;
-            while(current != null) {
-                current = current.next;
-
-            }
-            current.next = new ListNode(val);
+        for (int i = 0; i < (len -n -1); i++) {
+            current = current.next;
         }
+        current.next = current.next.next;
+        return dummyNode.next;
+
     }
+
     // для начала находим len
-    private int getLinkedListLenght(ListNode head) {
+    private int getLinkedListLenght(ListNode dummyNode) {
         int i = 0;
-        ListNode current = head;
+        ListNode current = dummyNode;
         while(current != null) {
             current = current.next;
             i++;
@@ -42,16 +38,46 @@ public class RemoveNthNodeFromEndOfList {
         return i;
     }
 
-    private ListNode findPrevNodeByIndex(ListNode head,int n) {
-        ListNode dummyNode = new ListNode(0, head);
-       int index = getLinkedListLenght(dummyNode) - n;
-       int i = 0;
-       ListNode current = dummyNode;
-       while (i != index) {
-           i++;
-           current = current.next;
-       }
-       return current;
+//    private ListNode findPrevNodeByIndex(ListNode head,int n) {
+//        ListNode dummyNode = new ListNode(0, head);
+//        int index = getLinkedListLenght(dummyNode) - n;
+//        int i = 0;
+//        ListNode current = dummyNode;
+//        while (i != index) {
+//           i++;
+//           current = current.next;
+//       }
+//       return current;
+//
+//    }
+
+//    public static void add(int val) {
+//        ListNode current = new ListNode(val, null);
+//        while(current != null) {
+//            current = current.next;
+//
+//        }
+//        current.next = new ListNode(val);
+//    }
+
+    public void printLinkedList(ListNode dummyNode) {
+        List<Integer> linkedList = new ArrayList<>();
+        int len = getLinkedListLenght(dummyNode);
+        for (int i = 0; i < len; i++) {
+            linkedList.add(dummyNode.next.val);
+            dummyNode.next = dummyNode.next.next;
+        }
+        for (Integer integer : linkedList) {
+            System.out.print(integer);
+        }
+    }
+
+    public static void main(String[] args) {
+        RemoveNthNodeFromEndOfList removeNthNodeFromEndOfList = new RemoveNthNodeFromEndOfList();
+        ListNode listNode = new ListNode(0, new ListNode(12, new ListNode(8, new ListNode(2, new ListNode(40)))));
+        removeNthNodeFromEndOfList.printLinkedList(listNode);
+        removeNthNodeFromEndOfList.removeNthFromEnd(listNode, 2);
+        removeNthNodeFromEndOfList.printLinkedList(listNode);
 
     }
 
