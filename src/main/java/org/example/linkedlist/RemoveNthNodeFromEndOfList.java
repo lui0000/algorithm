@@ -6,23 +6,20 @@ public class RemoveNthNodeFromEndOfList {
     // далее удаляем node.next = node.next.next
     // return dummy.next
 
-    private ListNode head;
-    private ListNode dummyNode = new ListNode(0, head);
-
-
-
     // есть три варианта:
     // 1. удаление node из начала, для этого нужен Dummy Node
     // 2. удаление из середины len(список) - n -1, чтобы выстроить связь
     // 3. удаление node с конца, просто предпоследний элемент указывает на null
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode prev = findPrevNodeByIndex(n);
+        ListNode dummyNode = new ListNode(0, head);
+        ListNode prev = findPrevNodeByIndex(head, n);
         prev.next = prev.next.next;
         return
     }
 
     public void add(int val) {
+        ListNode head = new ListNode(val, null);
        if(head == null) {
             head = new ListNode(val);
         } else{
@@ -45,7 +42,8 @@ public class RemoveNthNodeFromEndOfList {
         return i;
     }
 
-    private ListNode findPrevNodeByIndex(int n) {
+    private ListNode findPrevNodeByIndex(ListNode head,int n) {
+        ListNode dummyNode = new ListNode(0, head);
        int index = getLinkedListLenght(dummyNode) - n;
        int i = 0;
        ListNode current = dummyNode;
@@ -56,7 +54,6 @@ public class RemoveNthNodeFromEndOfList {
        return current;
 
     }
-
 
 }
 
