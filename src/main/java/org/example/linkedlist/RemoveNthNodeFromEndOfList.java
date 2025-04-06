@@ -17,7 +17,7 @@ public class RemoveNthNodeFromEndOfList {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummyNode = new ListNode(0, head);
         ListNode current = dummyNode;
-        int len = getLinkedListLenght(dummyNode);
+        int len = getLinkedListLength(dummyNode);
 
         for (int i = 0; i < (len -n -1); i++) {
             current = current.next;
@@ -28,7 +28,7 @@ public class RemoveNthNodeFromEndOfList {
     }
 
     // для начала находим len
-    private int getLinkedListLenght(ListNode dummyNode) {
+    private int getLinkedListLength(ListNode dummyNode) {
         int i = 0;
         ListNode current = dummyNode;
         while(current != null) {
@@ -51,32 +51,49 @@ public class RemoveNthNodeFromEndOfList {
 //
 //    }
 
-//    public static void add(int val) {
-//        ListNode current = new ListNode(val, null);
-//        while(current != null) {
-//            current = current.next;
-//
-//        }
-//        current.next = new ListNode(val);
-//    }
+    public static ListNode add(ListNode head, int val) {
+        ListNode newNode = new ListNode(val);
+
+        if (head == null) {
+            return newNode;
+        }
+
+        ListNode current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
+
+        return head;
+    }
 
     public void printLinkedList(ListNode dummyNode) {
-        List<Integer> linkedList = new ArrayList<>();
-        int len = getLinkedListLenght(dummyNode);
-        for (int i = 0; i < len; i++) {
-            linkedList.add(dummyNode.next.val);
-            dummyNode.next = dummyNode.next.next;
+        if (dummyNode == null || dummyNode.next == null) {
+            System.out.println("[]");
+            return;
         }
-        for (Integer integer : linkedList) {
-            System.out.print(integer);
+
+        List<Integer> values = new ArrayList<>();
+        ListNode current = dummyNode.next;
+
+        while (current != null) {
+            values.add(current.val);
+            current = current.next;
         }
+
+        System.out.println(values);
     }
 
     public static void main(String[] args) {
         RemoveNthNodeFromEndOfList removeNthNodeFromEndOfList = new RemoveNthNodeFromEndOfList();
-        ListNode listNode = new ListNode(0, new ListNode(12, new ListNode(8, new ListNode(2, new ListNode(40)))));
+        ListNode listNode = new ListNode(0, null);
+        add(listNode, 9);
+        add(listNode, 5);
+        add(listNode, 8);
+        add(listNode, 10);
+        add(listNode, 1);
         removeNthNodeFromEndOfList.printLinkedList(listNode);
-        removeNthNodeFromEndOfList.removeNthFromEnd(listNode, 2);
+        removeNthNodeFromEndOfList.removeNthFromEnd(listNode, 1);
         removeNthNodeFromEndOfList.printLinkedList(listNode);
 
     }
