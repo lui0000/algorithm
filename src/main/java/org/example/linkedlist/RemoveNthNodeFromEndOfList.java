@@ -51,11 +51,11 @@ public class RemoveNthNodeFromEndOfList {
 //
 //    }
 
-    public static ListNode add(ListNode head, int val) {
+    public static void add(ListNode head, int val) {
         ListNode newNode = new ListNode(val);
 
         if (head == null) {
-            return newNode;
+            return;
         }
 
         ListNode current = head;
@@ -64,7 +64,6 @@ public class RemoveNthNodeFromEndOfList {
         }
         current.next = newNode;
 
-        return head;
     }
 
     public void printLinkedList(ListNode dummyNode) {
