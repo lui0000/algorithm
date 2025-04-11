@@ -1,7 +1,18 @@
 package org.example.linkedlist;
 
 public class ReorderList {
+
     public void reorderList(ListNode head) {
+        ListNode current = head;
+        ListNode temp = current;
+        ListNode prev = reverseList(findPrevMiddle(head));
+        while (current.next != null && prev != null) {
+            temp.val = current.val;
+            current.val = prev.val;
+            prev.val = temp.val;
+            current = current.next;
+            prev = prev.next;
+        }
 
     }
 
@@ -20,6 +31,15 @@ public class ReorderList {
     }
 
     public ListNode findPrevMiddle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
 
     }
+
+
 }
