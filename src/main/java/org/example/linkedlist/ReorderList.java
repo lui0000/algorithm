@@ -7,15 +7,15 @@ public class ReorderList {
 
     public void reorderList(ListNode head) {
         ListNode current = head;
-        ListNode temp = current;
-        ListNode prev = reverseList(findPrevMiddle(head));
-        while (current.next != null && prev != null) {
-            temp.val = current.next.val;
-            current.next.val = prev.val;
-            current = current.next;
-            prev.val = temp.val;
-            current = current.next;
-            prev = prev.next;
+        ListNode temp = findPrevMiddle(head);
+        ListNode prev = reverseList(temp.next);
+        temp.next = null;
+
+        while (prev != null) {
+            temp = current.next;
+            current.next = prev;
+            current = prev;
+            prev = temp;
         }
 
     }
@@ -45,6 +45,8 @@ public class ReorderList {
         return slow;
 
     }
+
+
     public void printLinkedList(ListNode head) {
         if (head == null) {
             System.out.println("[]");
