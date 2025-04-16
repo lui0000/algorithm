@@ -42,17 +42,27 @@ public class MergeTwoSortedLists {
         }
 
         Collections.sort(intermediateResult);
-        ListNode res = null;
+        ListNode head;
         for (Integer integer : intermediateResult) {
-            res.val = integer;
+            head = new ListNode(integer);
 
-            ListNode current = res;
+            ListNode current = head;
             while (current.next != null) {
                 current = current.next;
             }
-            current.next = res;
+            current.next = current;
         }
-        return res;
+        return head;
+
+
+//        Если head ещё null:
+//        Создаём новый ListNode с integer
+//                head = этот узел
+//                tail = этот узел
+//        Иначе:
+//        Создаём новый ListNode с integer
+//        tail.next = новый узел
+//                tail = новый узел
     }
     public void printLinkedList(ListNode head) {
         if (head == null) {
