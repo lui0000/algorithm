@@ -6,7 +6,7 @@ import java.util.List;
 public class MergeKSortedLists {
     public ListNode mergeKLists(ListNode[] lists) {
         Integer minEl = findMinInRow(lists);
-        ListNode head = new ListNode();
+        ListNode head;
         if(minEl == null) {
             return null;
         }
@@ -19,7 +19,7 @@ public class MergeKSortedLists {
                 current.next = null;
                 break;
             }
-            current.next = lists[minEl].next;
+            current.next = lists[minEl];
             current = current.next;
             lists[minEl] = lists[minEl].next;
 
@@ -32,21 +32,15 @@ public class MergeKSortedLists {
     }
 
     private Integer findMinInRow(ListNode[] lists) {
-        ListNode current1;
-        ListNode dummyNode = new ListNode();
-        ListNode temp = new ListNode(Integer.MAX_VALUE);
-        int minIndex = temp.val;
+        Integer minIndex = null;
+        int minValue = Integer.MAX_VALUE;
 
-        for(int i =0; i<lists.length; i++) {
-            current1 = lists[i];
-            if(current1.val <= temp.val) {
-                temp = current1;
+        for (int i = 0; i < lists.length; i++) {
+            if (lists[i] != null && lists[i].val < minValue) {
+                minValue = lists[i].val;
                 minIndex = i;
             }
-
         }
-        if (minIndex == Integer.MAX_VALUE)
-            return null;
 
         return minIndex;
     }
